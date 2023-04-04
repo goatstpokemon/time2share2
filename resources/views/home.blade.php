@@ -1,13 +1,17 @@
 @extends('layout')
-
+@section('assets')
+<link rel="stylesheet" href="{{ asset('css/home-page.css') }}">
+@endsection
 
 @section('content')
 <div class="container">    
-   @foreach ($products as $product)
-    <a href="/products/{{$product['id']}}">{{$product['name']}}</a>
-    <p>{{$product['date']}} </p>
-@endforeach
+   <section class="flex-row">
+    @foreach ($products as $product)
+    @
+    <x-product :name="$product->name" :img="$product->product_image" :return="$product->return_date" :rented="$product->rented_by" :rental="$product->rental_started" :id="$product->id" />
     
-
+    
+    @endforeach
+</section>
 </div>
 @endsection

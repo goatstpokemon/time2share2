@@ -1,0 +1,15 @@
+.link {
+    color: #0088cf;
+    font-weight: bold;
+}
+
+.large-card {
+    width: 15vw;
+    height: 20vh;
+    background-color: #ffffff;
+    padding: 1rem;
+}
+
+.space-between {
+    justify-content: space-between;
+}
