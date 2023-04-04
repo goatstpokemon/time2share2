@@ -26,6 +26,7 @@ class ProductFactory extends Factory
             'rentable' => $this->faker->randomElement([true, false]),
             'return_date' => $this->faker->dateTime(),
             'rental_started' => $this->faker->dateTime(),
+            'rented_by' => User::all()->random()->id,
         ];
     }
 }

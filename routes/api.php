@@ -11,12 +11,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //  Public Routes
-Route::post('/login', array(AuthController::class, 'login'));
-Route::post('/register', array(AuthController::class, 'register'));
+
+
 
 
 // Protected Routes
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::resource('/products', ProductController::class);
-    Route::post('/logout', array(AuthController::class, 'logout'));
-});

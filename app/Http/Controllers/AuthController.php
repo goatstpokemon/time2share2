@@ -14,20 +14,32 @@ class AuthController extends Controller
 {
     use HttpResponses;
 
-    public function login(LoginUserRequest $request)
+    public function login(Request $request)
     {
-        $request->validated($request->all());
-
-        if (!Auth::attempt(
-            $request->only(['email', 'password'])
-        )) {
-            return $this->error('', 'Credidentials do not match', 401);
-        }
-        $user = User::where('email', $request->email)->first();
-        return $this->success([
-            'user' => $user,
-            'token' => $user->createToken('Api Token of ' . $user->name)->plainTextToken
+        // dd($request);
+        $formFields = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => 'required'
         ]);
+
+        if (auth()->attempt($formFields)) {
+            $request->session()->regenerate();
+            return redirect('/');
+        }
+        return back();
+
+
+
+        //     if (!Auth::attempt(
+        //         $request->only(['email', 'password'])
+        //     )) {
+        //         return $this->error('', 'Credidentials do not match', 401);
+        //     }
+        //     $user = User::where('email', $request->email)->first();
+        //     return $this->success([
+        //         'user' => $user,
+        //         'token' => $user->createToken('Api Token of ' . $user->name)->plainTextToken
+        //     ]);
     }
 
     public function register(StoreUserRequest $request)
@@ -45,6 +57,9 @@ class AuthController extends Controller
     }
     public function logout()
     {
-        return request()->json('This is my logout endpoint');
+        Auth::user()->currentAccessToken()->delete();
+        return $this->success([
+            'message' => 'You have been logged out'
+        ]);
     }
 }
