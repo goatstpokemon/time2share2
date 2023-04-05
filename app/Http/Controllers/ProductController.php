@@ -25,25 +25,36 @@ class ProductController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        return view('pages.products.createProduct');
+    }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductRequest $request)
+    public function store(Request $request)
     {
-        $request->validated($request->all());
-        $product = Product::create([
-            'user_id' => Auth::user()->id,
-            'name' => $request->name,
-            'description' => $request->description,
-            'product_image' => $request->product_image,
-            'rentable' => $request->rentable,
-            'rental_started' => $request->rental_started,
-            'return_date' => $request->return_date,
-            'rented_by' => $request->rented_by
-        ]);
 
-        return new ProductResource($product);
+
+        $product = new Product;
+        $product->user_id = Auth::user()->id;
+        $product->name = $request->name;
+        $product->description = $request->description;
+        if ($request->hasFile('image')) {
+            $request->validate([
+                'image' => 'mimes:jpeg,bmp,png, jpg' // Only allow .jpg, .bmp and .png file types.
+            ]);
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $path = $image->storeAs('public/images', $filename);
+            $product->image = $path;
+        }
+        $product->rentable = true;
+        $product->rented_by = 0;
+        $product->save();
+
+        return redirect('/');
     }
 
     /**

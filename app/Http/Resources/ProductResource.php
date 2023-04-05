@@ -19,7 +19,7 @@ class ProductResource extends JsonResource
             'attributes' => [
                 'name' => $this->name,
                 'description' => $this->description,
-                'product_image' => $this->product_image,
+                'image' => $this->image,
                 'rentable' => $this->rentable,
                 'return_date' => $this->return_date,
                 'rental_started' => $this->rental_started,

@@ -27,19 +27,6 @@ class AuthController extends Controller
             return redirect('/');
         }
         return back();
-
-
-
-        //     if (!Auth::attempt(
-        //         $request->only(['email', 'password'])
-        //     )) {
-        //         return $this->error('', 'Credidentials do not match', 401);
-        //     }
-        //     $user = User::where('email', $request->email)->first();
-        //     return $this->success([
-        //         'user' => $user,
-        //         'token' => $user->createToken('Api Token of ' . $user->name)->plainTextToken
-        //     ]);
     }
 
     public function register(StoreUserRequest $request)

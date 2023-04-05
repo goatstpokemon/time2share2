@@ -25,8 +25,9 @@ Route::get('/login', array('as' => 'login',  function () {
     return view('pages.login');
 }));
 
+Route::get('/', array(ProductController::class, 'index'))->middleware('auth');
 
-Route::resource('/products', ProductController::class)->middleware('auth');
+
+Route::get('/products/create', array(ProductController::class, 'create'))->middleware('auth');
+Route::post('/products/create', array(ProductController::class, 'store'))->middleware('auth');
 Route::post('/logout', array(AuthController::class, 'logout'))->middleware('auth');
-
-Route::get('/', [ProductController::class, 'index']);
