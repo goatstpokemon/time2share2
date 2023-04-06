@@ -15,7 +15,7 @@
     <title>Time2Share</title>
 </head>
 <body>
-    
+    <x-sidebar/>
     @yield('content')
 </body>
 </html>

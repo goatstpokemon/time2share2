@@ -1,0 +1,1 @@
+<?php /**PATH C:\Users\Luke\Desktop\time2share2\resources\views/pages/products/borrowed.blade.php ENDPATH**/ ?>

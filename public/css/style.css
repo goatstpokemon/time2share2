@@ -9,15 +9,17 @@ h1 {
 h2 {
     font-size: 20px;
 }
-
+* {
+    box-sizing: border-box;
+}
 body {
-    background-color: #f9fbfc;
+    margin: 0;
+    padding: 0;
+    background-color: #e9f8ff;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 input[type="search"] {
@@ -94,4 +96,46 @@ button[type="submit"] {
 
 .text-center {
     text-align: center;
+}
+.logo {
+    margin: 0;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    gap: 0;
+    width: 100%;
+    text-align: center;
+    display: inline;
+}
+.logo a {
+    display: inline;
+}
+.blue {
+    color: #0088cf;
+    display: inline;
+}
+
+.side-bar {
+    width: 20vw;
+    justify-content: start;
+    display: flex;
+    margin-top: 10%;
+    flex-direction: column;
+    align-items: center;
+}
+
+ul {
+    list-style: none;
+}
+
+.link-list {
+    height: fit-content;
+    padding: 5rem 0;
+}
+
+.link-list li {
+    margin-bottom: 2rem;
+}
+.link-list h1 {
+    margin-bottom: 3rem;
 }

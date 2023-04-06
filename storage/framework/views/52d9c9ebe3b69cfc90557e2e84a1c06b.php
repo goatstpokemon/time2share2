@@ -15,7 +15,21 @@
     <title>Time2Share</title>
 </head>
 <body>
-    
+    <?php if (isset($component)) { $__componentOriginald31f0a1d6e85408eecaaa9471b609820 = $component; } ?>
+<?php $component = App\View\Components\Sidebar::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('sidebar'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\Sidebar::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginald31f0a1d6e85408eecaaa9471b609820)): ?>
+<?php $component = $__componentOriginald31f0a1d6e85408eecaaa9471b609820; ?>
+<?php unset($__componentOriginald31f0a1d6e85408eecaaa9471b609820); ?>
+<?php endif; ?>
     <?php echo $__env->yieldContent('content'); ?>
 </body>
 </html><?php /**PATH C:\Users\Luke\Desktop\time2share2\resources\views/layout.blade.php ENDPATH**/ ?>

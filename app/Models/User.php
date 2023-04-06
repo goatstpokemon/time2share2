@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Product::class, 'user_id');
     }
+
+    public function rentedProducts()
+    {
+        return $this->hasMany(Product::class, 'rented_by');
+    }
 }

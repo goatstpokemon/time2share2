@@ -8,8 +8,35 @@
     height: 20vh;
     background-color: #ffffff;
     padding: 1rem;
+    margin-left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.large-card h1 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .space-between {
     justify-content: space-between;
+}
+
+.container {
+    margin-top: 10%;
+}
+
+.create {
+    border-radius: 0.5rem;
+    border: none;
+    padding: 0.6rem 1.6rem;
+    color: white;
+    background: #0088cf;
+    font-size: 1rem;
+}
+
+.buttons {
+    margin: 1.5rem 0;
 }

@@ -17,4 +17,8 @@ class Product extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function rentedBy()
+    {
+        return $this->belongsTo(User::class, 'rented_by');
+    }
 }

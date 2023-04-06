@@ -20,8 +20,42 @@ class ProductController extends Controller
         $user =  Auth::user();
         $products = $user->products;
 
+        return view('pages.products.index', [
+            "products" => $products,
+            "user" => $user
+        ]);
+    }
+
+    public function home()
+    {
+        $user =  Auth::user();
+        $products = $user->products;
+
         return view('home', [
-            "products" => $products
+            "products" => $products,
+            "user" => $user
+        ]);
+    }
+    public function borrowed()
+    {
+        $user =  Auth::user();
+        $products = $user->products;
+
+
+        return view('pages.products.borrowed', [
+            "products" => $products,
+            "user" => $user
+        ]);
+    }
+    public function borrowing()
+    {
+        $user =  Auth::user();
+        $products = $user->rentedProducts;
+
+
+        return view('pages.products.borrowing', [
+            "products" => $products,
+            "user" => $user
         ]);
     }
 
