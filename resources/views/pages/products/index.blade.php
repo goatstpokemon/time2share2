@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">   
 <section class="flex-col">
-    <h2>Uitgeleende producten</h2>
+    <h2>Al jouw producten</h2>
     <section class="flex-row">
     @foreach ($products as $product)
     

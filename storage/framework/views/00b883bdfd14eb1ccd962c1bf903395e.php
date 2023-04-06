@@ -5,7 +5,7 @@
 <?php $__env->startSection('content'); ?>
 <div class="container">   
 <section class="flex-col">
-    <h2>Uitgeleende producten</h2>
+    <h2>Al jouw producten</h2>
     <section class="flex-row">
     <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     

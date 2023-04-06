@@ -15,14 +15,21 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function availible()
+    {
+        return Product::where('rentable', 1)->get();
+    }
+
     public function index()
     {
         $user =  Auth::user();
         $products = $user->products;
 
+
         return view('pages.products.index', [
             "products" => $products,
-            "user" => $user
+            "user" => $user,
+
         ]);
     }
 
@@ -30,8 +37,9 @@ class ProductController extends Controller
     {
         $user =  Auth::user();
         $products = $user->products;
-
+        $availible = ProductController::availible();
         return view('home', [
+            "available" => $availible,
             "products" => $products,
             "user" => $user
         ]);
