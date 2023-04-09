@@ -1,7 +1,7 @@
 
 <figure class="large-card">
     
-    <img src="<?php echo e(asset('storage/images/' . $img)); ?>" alt="<?php echo e($name); ?>" width="30px" height="30px">
+    <img src="<?php echo e($img); ?>" alt="<?php echo e($name); ?>" width="40px" height="40px" class="sm-product-img">
     <h1><?php echo e($name); ?></h1>
     <section class="flex-row space-between">
     <span><strong>Start: </strong><p><?php echo e(date('d M', strtotime($rental))); ?></p></span>

@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -77,25 +78,19 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-
-
+        $request->validate([
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
         $product = new Product;
         $product->user_id = Auth::user()->id;
         $product->name = $request->name;
         $product->description = $request->description;
-        if ($request->hasFile('image')) {
-            $request->validate([
-                'image' => 'mimes:jpeg,bmp,png, jpg' // Only allow .jpg, .bmp and .png file types.
-            ]);
-            $image = $request->file('image');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            $path = $image->storeAs('public/images', $filename);
-            $product->image = $path;
-        }
+        $photo = $request->file('photo');
+        $path = $photo->store('public/products');
+        $product->product_image = Storage::url($path);
         $product->rentable = true;
-        $product->rented_by = 0;
+        $product->rented_by = null;
         $product->save();
-
         return redirect('/');
     }
 

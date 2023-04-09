@@ -1,10 +1,11 @@
-
 <?php $__env->startSection('assets'); ?>
 <link rel="stylesheet" href="<?php echo e(asset('css/home-page.css')); ?>">
 <?php $__env->stopSection(); ?>
 <?php
 $counter = 0;
 ?>
+
+
 <?php $__env->startSection('content'); ?>
 <div class="container">    
     <h1>Welkom <?php echo e($user->name); ?></h1>
@@ -17,8 +18,11 @@ $counter = 0;
     <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <?php if($product->rentable != false ): ?>
      <?php if($counter < 3): ?>
+     <?php
+    
+    ?>
     <?php if (isset($component)) { $__componentOriginal4912e54b47cc540c8c40bfbaaa4ad898 = $component; } ?>
-<?php $component = App\View\Components\Product::resolve(['name' => $product->name,'img' => $product->image,'return' => $product->return_date,'rented' => $product->rented_by,'rental' => $product->rental_started,'id' => $product->id] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component = App\View\Components\Product::resolve(['name' => $product->name,'img' => $product->product_image,'return' => $product->return_date,'rented' => $product->rented_by,'rental' => $product->rental_started,'id' => $product->id] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
 <?php $component->withName('product'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>

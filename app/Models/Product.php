@@ -21,4 +21,8 @@ class Product extends Model
     {
         return $this->belongsTo(User::class, 'rented_by');
     }
+    public function getPhotoUrlAttribute()
+    {
+        return $this->attributes['photo'] ? asset($this->attributes['photo']) : asset('img/no-image.png');
+    }
 }

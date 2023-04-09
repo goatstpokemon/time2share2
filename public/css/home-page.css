@@ -9,13 +9,19 @@
     background-color: #ffffff;
     padding: 1rem;
     margin-left: 0;
-    overflow: hidden;
+
     white-space: nowrap;
     text-overflow: ellipsis;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
 }
 
+.large-card img {
+    border-radius: 0.3rem;
+    grid-column: span;
+}
 .large-card h1 {
-    overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }

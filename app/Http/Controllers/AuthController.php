@@ -29,9 +29,13 @@ class AuthController extends Controller
         return back();
     }
 
-    public function register(StoreUserRequest $request)
+    public function register(Request $request)
     {
-        $request->validated($request->all());
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -39,7 +43,8 @@ class AuthController extends Controller
         ]);
         return $this->success([
             'user' => $user,
-            'token' => $user->createToken('api-token of' . $user->name)->plainTextToken
+            'message' => 'Registration successful',
+            'token' => $user->createToken('authToken')->plainTextToken,
         ]);
     }
     public function logout()

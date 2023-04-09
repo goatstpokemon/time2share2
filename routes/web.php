@@ -24,6 +24,9 @@ Route::post('/login', array(AuthController::class, 'login'));
 Route::get('/login', array('as' => 'login',  function () {
     return view('pages.login');
 }));
+Route::get('/register', array('as' => 'register',  function () {
+    return view('pages.register');
+}));
 
 Route::get('/', array(ProductController::class, 'home'))->middleware('auth');
 
