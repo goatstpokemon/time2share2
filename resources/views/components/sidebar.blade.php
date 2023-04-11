@@ -5,5 +5,10 @@
         <li><a href="/products">Alle producten</a></li>
         <li><a href="/products/borrowed">Uitgeleende producten</a></li>
         <li><a href="/products/borrowing">Aan het lenen</a></li>
+        <form action="/logout" method="POST">
+            @csrf
+            <button type="submit">Logout</button>
+        </form>
+
     </ul>
 </aside> 

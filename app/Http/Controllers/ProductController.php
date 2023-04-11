@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
+use App\Models\User;
 use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,13 +24,13 @@ class ProductController extends Controller
 
     public function index()
     {
-        $user =  Auth::user();
-        $products = $user->products;
+
+        $products = Product::all();
 
 
         return view('pages.products.index', [
             "products" => $products,
-            "user" => $user,
+            
 
         ]);
     }
@@ -97,9 +98,17 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show(Request $request)
     {
-        return $this->isNotAuthorised($product) ? $this->isNotAuthorised($product) :  new ProductResource($product);
+        $productId = $request->route('id');
+        $product = Product::find($productId);
+        $owner = User::find($product->user_id);
+        $rentee = User::find($product->rented_by);
+        return view('pages.products.show', [
+            'product' => $product,
+            'eigenaar' => $owner,
+            'lener' => $rentee
+        ]);
     }
 
 
@@ -113,7 +122,13 @@ class ProductController extends Controller
         $product->update($request->all());
         return new ProductResource($product);
     }
+    // public function allProducts(Request $request)
+    // {
+    //    $products = Product::all()
 
+    //     return 
+
+    // }
     /**
      * Remove the specified resource from storage.
      */

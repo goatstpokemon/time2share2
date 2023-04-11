@@ -1,0 +1,32 @@
+.container-show {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100vw;
+    height: 60vh;
+    margin-right: 5rem;
+}
+
+.container-show img {
+    border-radius: 1rem;
+}
+
+.container-show span > a:hover {
+    color: #0088cf;
+}
+
+.btn-beschikbaar {
+    background-color: #0088cf;
+    border-radius: 0.3rem;
+    color: white;
+    width: 7rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.beschrijving {
+    margin-top: 3rem;
+}

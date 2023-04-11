@@ -33,6 +33,9 @@ Route::get('/', array(ProductController::class, 'home'))->middleware('auth');
 
 Route::get('/products/create', array(ProductController::class, 'create'))->middleware('auth');
 Route::post('/products/create', array(ProductController::class, 'store'))->middleware('auth');
+Route::put('/products/{id}/edit', array(ProductController::class, 'show'))->middleware('auth');
+Route::get('/products/{id}/edit', array(ProductController::class, 'show'))->middleware('auth');
+Route::get('/products/{id}/', array(ProductController::class, 'show'))->middleware('auth');
 Route::get('/products', array(ProductController::class, 'index'))->middleware('auth');
 Route::get('/products/borrowed', array(ProductController::class, 'borrowed'))->middleware('auth');
 Route::get('/products/borrowing', array(ProductController::class, 'borrowing'))->middleware('auth');
