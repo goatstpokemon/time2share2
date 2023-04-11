@@ -9,6 +9,8 @@
     <h1 class="text-center">Product aanmaken</h1>
     <label for="name"><h3>Product naam</h3></label>
     <input type="text" name="name" id="name">
+    <label for="category"><h3>Product categorie</h3></label>
+    <input type="text" name="category" id="category" >
     <label for="description"><h3>Product beschrijving</h3></label>
     <textarea name="description" id="description"></textarea>   
     <label for="photo"><h3>Foto uploaden</h3></label>

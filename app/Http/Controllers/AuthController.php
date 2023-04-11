@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    use HttpResponses;
+
 
     public function login(Request $request)
     {

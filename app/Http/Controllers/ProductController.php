@@ -65,6 +65,7 @@ class ProductController extends Controller
         $product->user_id = Auth::user()->id;
         $product->name = $request->name;
         $product->description = $request->description;
+        $product->category = $request->category;
         $photo = $request->file('photo');
         $path = $photo->store('public/products');
         $product->product_image = Storage::url($path);
