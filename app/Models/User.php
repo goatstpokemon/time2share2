@@ -52,4 +52,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Product::class, 'rented_by');
     }
+
+    public function lent_products()
+    {
+        return $this->hasMany(Lending::class, 'lender_id');
+    }
+
+    public function borrowed_products()
+    {
+        return $this->hasMany(Lending::class, 'borrower_id');
+    }
 }

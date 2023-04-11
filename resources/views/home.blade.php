@@ -8,7 +8,7 @@ $counter = 0;
 
 
 @section('content')
-<div class="container">    
+<div class="container fix-mob">    
     <h1>Welkom {{$user->name}}</h1>
     <section class="buttons">
         <a class="create" href="/products/create">Product aanmaken</a>

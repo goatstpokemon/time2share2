@@ -16,6 +16,28 @@
     <title>Time2Share</title>
 </head>
 <body>
+    <section class="mb-nav">
+    <span class="logo-mob logo"><a href="/" ><span class="blue" >Time</span>2Share</a></span>
+    <nav class="mobile-nav">
+    <button class="hamburger">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+    </button>
+    <ul class="mobile-nav-menu">
+        <li><a href="/products">Alle</a></li>
+        <li><a href="/products/borrowed">Uitgeleend</a></li>
+        <li><a href="/products/borrowing">Aan het lenen</a></li>
+        <li>
+         <form action="/logout" method="POST">
+            <?php echo csrf_field(); ?>
+            <button type="submit">Logout</button>
+        </form>
+    </li>
+    </ul>
+</nav>
+</section>
+    <section class="desktop">
     <?php if (isset($component)) { $__componentOriginald31f0a1d6e85408eecaaa9471b609820 = $component; } ?>
 <?php $component = App\View\Components\Sidebar::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
 <?php $component->withName('sidebar'); ?>
@@ -33,7 +55,11 @@
 <?php endif; ?>
     <?php echo $__env->yieldContent('content'); ?>
 
-    <?php echo $__env->yieldContent('scripts'); ?>
     
+    
+</section>
+
+<?php echo $__env->yieldContent('scripts'); ?>
+<script  src="<?php echo e(asset('js/nav.js')); ?>"></script>
 </body>
 </html><?php /**PATH C:\Users\Luke\Desktop\time2share2\resources\views/layout.blade.php ENDPATH**/ ?>

@@ -3,7 +3,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
-<section class="m-10per">
+<section class="m-10per fix-mob">
 <form action="/products/create" method="POST" enctype="multipart/form-data">
     <?php echo csrf_field(); ?>
     <h1 class="text-center">Product aanmaken</h1>

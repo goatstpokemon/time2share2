@@ -10,7 +10,7 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'name', 'description', 'product', 'rentable', 'return_date', 'rental_started', 'rented_by'
+        'user_id', 'name', 'description', 'product', 'rentable', 'return_date', 'rental_started', 'rented_by', 'returned', 'product_image',
     ];
 
     public function user()
@@ -24,5 +24,9 @@ class Product extends Model
     public function getPhotoUrlAttribute()
     {
         return $this->attributes['photo'] ? asset($this->attributes['photo']) : asset('img/no-image.png');
+    }
+    public function lendings()
+    {
+        return $this->hasMany(Lending::class);
     }
 }

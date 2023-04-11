@@ -9,12 +9,9 @@ use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
-    public function addReview(Request $request, $userId)
+    public function addReview($rating, $review, $userId)
     {
-        $validatedData = $request->validate([
-            'review' => 'required|string|max:255',
-            'rating' => 'required|integer|between:1,10',
-        ]);
+
 
         $user = User::find($userId);
 
@@ -23,16 +20,11 @@ class ReviewController extends Controller
         }
 
         $review = new Review();
-        $productId = $request->route('id');
-        $product = Product::find($productId);
-        $review->review = $validatedData['review'];
-        $review->rating = $validatedData['rating'];
+
+        $review->review = $review;
+        $review->rating = $rating;
         $review->user_id = $user->id;
-        $product->rented_by = null;
-        $product->rental_started = null;
-        $product->return_date = null;
-        $product->rentable = 1;
-        $product->save();
+
         $review->save();
 
 

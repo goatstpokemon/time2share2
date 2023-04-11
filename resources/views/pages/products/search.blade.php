@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 
-<div class="container">   
+<div class="container fix-mob">   
 <section>
     <h1>Zoek resultaten</h1>
 @if(count($results) > 0)

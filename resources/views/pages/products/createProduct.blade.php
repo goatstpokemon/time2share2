@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-<section class="m-10per">
+<section class="m-10per fix-mob">
 <form action="/products/create" method="POST" enctype="multipart/form-data">
     @csrf
     <h1 class="text-center">Product aanmaken</h1>

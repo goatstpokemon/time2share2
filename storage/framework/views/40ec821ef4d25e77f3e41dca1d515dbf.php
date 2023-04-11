@@ -3,34 +3,10 @@
 <link rel="stylesheet" href="<?php echo e(asset('css/home-page.css')); ?>" />
 <?php $__env->stopSection(); ?> 
 <?php $__env->startSection('content'); ?>
-<div class="container">
-  <section class="fix-mob">
-    <h2>Alle producten</h2>
-
-    <section class="search-container">
-      <form method="GET" action="/products/search" class="search">
-        <input type="text" name="q" placeholder="Zoek naar product" />
-        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-      </form>
-    </section>
-<section>
-    <h3>Categories</h3>    
-    <section class="overflow-x">
-       <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>      
-        
-        <a class="category" href="/products/filter/<?php echo e($product->category); ?>">
-          <?php echo e($product->category); ?>
-
-        </a>
-        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>  
-      </section>
-    </section>      
-    
-    
-      
-    
-
-    <section class="grid animate overflow-y">
+<div class="container fix-mob">
+  <section>
+    <h2>Resultaten</h2>
+<section class="grid animate">
       <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
       <?php if (isset($component)) { $__componentOriginal4912e54b47cc540c8c40bfbaaa4ad898 = $component; } ?>
@@ -52,9 +28,5 @@
       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </section>
   </section>
-</div>
-<?php $__env->stopSection(); ?> <?php $__env->startSection('scripts'); ?>
-<script src="<?php echo e(asset('js/animations.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
-
-<?php echo $__env->make('layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Luke\Desktop\time2share2\resources\views/pages/products/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Luke\Desktop\time2share2\resources\views/pages/products/filter.blade.php ENDPATH**/ ?>

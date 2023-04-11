@@ -6,6 +6,8 @@
 @endsection
 @section('content')
 <section class="container-show">
+    
+<section>
 <img src="{{ $product->product_image }}" alt="{{ $product->name }}" width="200px" height="200px" class="sm-product-img">
     <h1>{{$product->name}}</h1>
     <span><h2>Eigenaar:</h2><a href="/users/{{$owner->id}}"> {{$owner->name}}</a></span>
@@ -20,7 +22,7 @@
     </section>
     <section>
     @if($rentee && $rentee->id === $currentUser->id)  
-     <button type="submit" class="btn-return" id="open-overlay-return">Nu retourneren</button>
+     <a href="/products/{{$product->id}}/return" class="btn" >Nu retourneren</a>
     
     @endif
     @endif
@@ -37,7 +39,7 @@
         <p>{{$product->description}}</p>
     </section>
 
-   
+  </section> 
    
     <section class="overlay" id="overlay-borrow">        
         <div class="overlay-content" id="overlay-content-borrow">
@@ -54,40 +56,7 @@
         </div>
     </section>
 
-    <section class="overlay" id="overlay-return">
-    <div class="overlay-content" id="overlay-content-return">
-        <h2>Product retourneren</h2>
-        <form class="flex flex-col " action="/products/{{$product->id}}/return" method="POST">
-        @csrf
-        <div class="form-group">
-                        <label for="rating"><h1>Hoeveel sterren geef je de eigenaar?</h1></label>
-                        <div class="rating">
-                            <input type="radio" name="rating" id="rating-1" value="1">
-                            <label for="rating-1"><i class="fa fa-star"></i></label>
-
-                            <input type="radio" name="rating" id="rating-2" value="2">
-                            <label for="rating-2"><i class="fa fa-star"></i></label>
-
-                            <input type="radio" name="rating" id="rating-3" value="3">
-                            <label for="rating-3"><i class="fa fa-star"></i></label>
-
-                            <input type="radio" name="rating" id="rating-4" value="4">
-                            <label for="rating-4"><i class="fa fa-star"></i></label>
-
-                            <input type="radio" name="rating" id="rating-5" value="5">
-                            <label for="rating-5"><i class="fa fa-star"></i></label>
-
-                        </div>
-                    </div>
-        <div class="form-group">
-            <label for="review"><h1>Vertel ons meer</h1></label>
-            <textarea class="form-control" name="review" id="review" rows="10"></textarea>
-        </div>
-        <button type="submit" id="close-overlay-return">Submit</button>
-        </form>
-        
-        </div>
-    </section>
+    
 </section>
 @endsection
 @section('scripts')

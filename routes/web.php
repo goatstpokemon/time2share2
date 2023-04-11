@@ -41,9 +41,10 @@ Route::middleware(['auth'])->prefix('products')->group(function () {
     Route::get('/borrowed', [ProductController::class, 'borrowed']);
     Route::get('/borrowing', [ProductController::class, 'borrowing']);
     Route::post('/{id}/borrow', [ProductController::class, 'borrow']);
-    Route::post('/{id}/return', [ReviewController::class, 'addReview']);
+    Route::get('/{id}/return', [ProductController::class, 'return']);
     Route::get('/{id}/edit', [ProductController::class, 'edit']);
     Route::put('/{id}', [ProductController::class, 'update']);
+    Route::get('/filter/{category}', [ProductController::class, 'filter']);
     Route::get('/{id}', [ProductController::class, 'show']);
 });
 

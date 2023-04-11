@@ -4,7 +4,7 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 
-<div class="container">   
+<div class="container fix-mob">   
 <section>
     <h1>Zoek resultaten</h1>
 <?php if(count($results) > 0): ?>

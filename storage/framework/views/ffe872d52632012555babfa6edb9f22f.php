@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="<?php echo e(asset('css/home-page.css')); ?>">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
-<div class="container">   
+<div class="container fix-mob">   
 <section class="flex-col">
     <h2>Uitgeleende producten</h2>
     <section class="flex-row">

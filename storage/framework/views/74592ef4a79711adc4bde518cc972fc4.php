@@ -7,7 +7,7 @@ $counter = 0;
 
 
 <?php $__env->startSection('content'); ?>
-<div class="container">    
+<div class="container fix-mob">    
     <h1>Welkom <?php echo e($user->name); ?></h1>
     <section class="buttons">
         <a class="create" href="/products/create">Product aanmaken</a>

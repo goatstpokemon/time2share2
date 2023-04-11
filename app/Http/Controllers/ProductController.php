@@ -14,25 +14,24 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    use HttpResponses;
+    protected $lendingsController;
+
+    public function __construct(LendingsController $lendingsController)
+    {
+        $this->lendingsController = $lendingsController;
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function availible()
-    {
-        return Product::where('rentable', 1)->get();
-    }
+
 
     public function index()
     {
 
         $products = Product::all();
-
-
         return view('pages.products.index', [
             "products" => $products,
-
-
         ]);
     }
 
@@ -49,34 +48,11 @@ class ProductController extends Controller
             "rentedProducts" => $rentedProducts
         ]);
     }
-    public function borrowed()
-    {
-        $user =  Auth::user();
-        $products = $user->products;
-
-
-        return view('pages.products.borrowed', [
-            "products" => $products,
-            "user" => $user
-        ]);
-    }
-    public function borrowing()
-    {
-        $user =  Auth::user();
-        $rentedProducts = Product::where('rented_by', $user->id)->get();
-
-
-        return view('pages.products.borrowing', [
-            "products" => $rentedProducts,
-            "user" => $user
-        ]);
-    }
 
     public function create()
     {
         return view('pages.products.createProduct');
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -97,7 +73,6 @@ class ProductController extends Controller
         $product->save();
         return redirect('/');
     }
-
     /**
      * Display the specified resource.
      */
@@ -165,6 +140,56 @@ class ProductController extends Controller
             'currentUser' => $currentUser
         ]);
     }
+    public function filter(Request $request)
+    {
+        $category = $request->route('category');
+        $products = Product::where('category', $category)->get();
+        return view('pages.products.filter', ['products' => $products]);
+    }
+
+    public function borrowed()
+    {
+        $user =  Auth::user();
+        $products = $user->products;
+
+
+        return view('pages.products.borrowed', [
+            "products" => $products,
+            "user" => $user
+        ]);
+    }
+    public function borrowing()
+    {
+        $user =  Auth::user();
+        $rentedProducts = Product::where('rented_by', $user->id)->get();
+
+
+        return view('pages.products.borrowing', [
+            "products" => $rentedProducts,
+            "user" => $user
+        ]);
+    }
+    public function availible()
+    {
+        return Product::where('rentable', 1)->get();
+    }
+
+    public function return(Request $request)
+    {
+        $productId = $request->route('id');
+        $product = Product::find($productId);
+        $product->rented_by = null;
+        $product->rental_started = null;
+        $product->return_date = null;
+        $product->rentable = 0;
+        $product->save();
+        return redirect('/');
+    }
+
+    public function accept()
+    {
+    }
+
     public function borrow(Request $request)
     {
         $user = Auth::user();
@@ -197,12 +222,5 @@ class ProductController extends Controller
             ->orWhere('name', 'like', '%' . $q . '%')
             ->get();
         return view('pages.products.search', ['results' => $results]);
-    }
-
-    private function isNotAuthorised($product)
-    {
-        if (Auth::user()->id !== $product->user_id) {
-            return $this->error('', 'You are not authorised', 401);
-        }
     }
 }

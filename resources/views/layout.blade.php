@@ -16,10 +16,36 @@
     <title>Time2Share</title>
 </head>
 <body>
+    <section class="mb-nav">
+    <span class="logo-mob logo"><a href="/" ><span class="blue" >Time</span>2Share</a></span>
+    <nav class="mobile-nav">
+    <button class="hamburger">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+    </button>
+    <ul class="mobile-nav-menu">
+        <li><a href="/products">Alle</a></li>
+        <li><a href="/products/borrowed">Uitgeleend</a></li>
+        <li><a href="/products/borrowing">Aan het lenen</a></li>
+        <li>
+         <form action="/logout" method="POST">
+            @csrf
+            <button type="submit">Logout</button>
+        </form>
+    </li>
+    </ul>
+</nav>
+</section>
+    <section class="desktop">
     <x-sidebar/>
     @yield('content')
 
-    @yield('scripts')
     
+    
+</section>
+
+@yield('scripts')
+<script  src="{{ asset('js/nav.js') }}"></script>
 </body>
 </html>
