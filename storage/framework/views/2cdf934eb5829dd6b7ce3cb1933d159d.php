@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('assets'); ?>
 <link rel="stylesheet" href="<?php echo e(asset('css/login-page.css')); ?>">
 <?php $__env->stopSection(); ?>

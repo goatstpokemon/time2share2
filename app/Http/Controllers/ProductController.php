@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -30,7 +31,7 @@ class ProductController extends Controller
 
         return view('pages.products.index', [
             "products" => $products,
-            
+
 
         ]);
     }
@@ -39,11 +40,13 @@ class ProductController extends Controller
     {
         $user =  Auth::user();
         $products = $user->products;
+        $rentedProducts = Product::where('rented_by', $user->id)->get();
         $availible = ProductController::availible();
         return view('home', [
             "available" => $availible,
             "products" => $products,
-            "user" => $user
+            "user" => $user,
+            "rentedProducts" => $rentedProducts
         ]);
     }
     public function borrowed()
@@ -60,11 +63,11 @@ class ProductController extends Controller
     public function borrowing()
     {
         $user =  Auth::user();
-        $products = $user->rentedProducts;
+        $rentedProducts = Product::where('rented_by', $user->id)->get();
 
 
         return view('pages.products.borrowing', [
-            "products" => $products,
+            "products" => $rentedProducts,
             "user" => $user
         ]);
     }
@@ -102,12 +105,15 @@ class ProductController extends Controller
     {
         $productId = $request->route('id');
         $product = Product::find($productId);
+
         $owner = User::find($product->user_id);
         $rentee = User::find($product->rented_by);
+        $currentUser = Auth::user();
         return view('pages.products.show', [
             'product' => $product,
-            'eigenaar' => $owner,
-            'lener' => $rentee
+            'owner' => $owner,
+            'rentee' => $rentee,
+            'currentUser' => $currentUser
         ]);
     }
 
@@ -115,20 +121,64 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request)
     {
 
 
-        $product->update($request->all());
-        return new ProductResource($product);
+        $productId = $request->route('id');
+        $product = Product::find($productId);
+        if ($request->file('photo')) {
+            $photo = $request->file('photo');
+            $path = $photo->store('public/products');
+            $product->product_image = Storage::url($path) ?? $product->product_image;
+        } else {
+            $product->product_image = $product->product_image;
+        }
+        $product->category = $request->category;
+        $product->name = $request->name ?? $product->name;
+        $product->description = $request->description ?? $product->description;
+
+
+        $product->save();
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'updatedProduct' => $product
+            ], 200);
+        } else {
+            return redirect('/products/' . $productId);
+        }
     }
-    // public function allProducts(Request $request)
-    // {
-    //    $products = Product::all()
 
-    //     return 
+    public function edit(Request $request)
+    {
+        $productId = $request->route('id');
+        $product = Product::find($productId);
 
-    // }
+        $owner = User::find($product->user_id);
+        $rentee = User::find($product->rented_by);
+        $currentUser = Auth::user();
+        return view('pages.products.edit', [
+            'product' => $product,
+            'owner' => $owner,
+            'rentee' => $rentee,
+            'currentUser' => $currentUser
+        ]);
+    }
+    public function borrow(Request $request)
+    {
+        $user = Auth::user();
+        $productId = $request->route('id');
+        $product = Product::find($productId);
+
+        $product->rented_by = $user->id;
+        $product->rental_started = $request->begin;
+        $product->return_date = $request->end;
+        $product->rentable = 0;
+        $product->save();
+        return redirect('/');
+    }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -137,6 +187,16 @@ class ProductController extends Controller
 
         return $this->isNotAuthorised($product) ? $this->isNotAuthorised($product) :
             $product->delete();
+    }
+
+    public function search(Request $request)
+    {
+        $q = $request->input('q');
+        $results = DB::table('products')
+            ->where('name', 'like', '%' . $q . '%')
+            ->orWhere('name', 'like', '%' . $q . '%')
+            ->get();
+        return view('pages.products.search', ['results' => $results]);
     }
 
     private function isNotAuthorised($product)

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\UserController;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
@@ -28,15 +30,32 @@ Route::get('/register', array('as' => 'register',  function () {
     return view('pages.register');
 }));
 
-Route::get('/', array(ProductController::class, 'home'))->middleware('auth');
+Route::get('/', array('as' => 'home', ProductController::class, 'home'))->middleware('auth');
+
+Route::middleware(['auth'])->prefix('products')->group(function () {
+    Route::get('/search', [ProductController::class, 'search']);
+    Route::get('/create', [ProductController::class, 'create']);
+    Route::post('/create', [ProductController::class, 'store']);
+
+    Route::get('/', [ProductController::class, 'index']);
+    Route::get('/borrowed', [ProductController::class, 'borrowed']);
+    Route::get('/borrowing', [ProductController::class, 'borrowing']);
+    Route::post('/{id}/borrow', [ProductController::class, 'borrow']);
+    Route::post('/{id}/return', [ReviewController::class, 'addReview']);
+    Route::get('/{id}/edit', [ProductController::class, 'edit']);
+    Route::put('/{id}', [ProductController::class, 'update']);
+    Route::get('/{id}', [ProductController::class, 'show']);
+});
 
 
-Route::get('/products/create', array(ProductController::class, 'create'))->middleware('auth');
-Route::post('/products/create', array(ProductController::class, 'store'))->middleware('auth');
-Route::put('/products/{id}/edit', array(ProductController::class, 'show'))->middleware('auth');
-Route::get('/products/{id}/edit', array(ProductController::class, 'show'))->middleware('auth');
-Route::get('/products/{id}/', array(ProductController::class, 'show'))->middleware('auth');
-Route::get('/products', array(ProductController::class, 'index'))->middleware('auth');
-Route::get('/products/borrowed', array(ProductController::class, 'borrowed'))->middleware('auth');
-Route::get('/products/borrowing', array(ProductController::class, 'borrowing'))->middleware('auth');
+Route::middleware(['auth'])->prefix('users')->group(
+    function () {
+        Route::get('/', [UserController::class, 'index']);
+        Route::put('/{id}', [UserController::class, 'editProfile']);
+        Route::get('/{id}/edit', [UserController::class, 'profile']);
+        Route::get('/profile/edit', [UserController::class, 'profile']);
+        Route::get('/{id}', [UserController::class, 'show']);
+    }
+);
+
 Route::post('/logout', array(AuthController::class, 'logout'))->middleware('auth');

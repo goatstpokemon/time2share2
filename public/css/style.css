@@ -21,6 +21,9 @@ body {
     overflow: hidden;
     display: flex;
 }
+button {
+    border: none;
+}
 
 input[type="search"] {
     border: 1px solid #f1f1f1;
@@ -55,6 +58,9 @@ span {
 
 .link {
     color: #0088cf;
+}
+.link:hover {
+    color: #333333;
 }
 
 /* LOGIN PAGINA */
@@ -138,4 +144,27 @@ ul {
 }
 .link-list h1 {
     margin-bottom: 3rem;
+}
+
+a:hover {
+    color: #0088cf;
+}
+
+.create:hover {
+    color: white;
+    background-color: #333333;
+}
+button {
+    background-color: #0088cf;
+    border-radius: 0.3rem;
+    color: white;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    word-wrap: nowrap;
+}
+button:hover {
+    background-color: #333;
 }

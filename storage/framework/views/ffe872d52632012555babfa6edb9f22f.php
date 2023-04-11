@@ -10,7 +10,7 @@
     <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     
     <?php if (isset($component)) { $__componentOriginal4912e54b47cc540c8c40bfbaaa4ad898 = $component; } ?>
-<?php $component = App\View\Components\Product::resolve(['name' => $product->name,'img' => $product->image,'return' => $product->return_date,'rented' => $product->rented_by,'rental' => $product->rental_started,'id' => $product->id] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component = App\View\Components\Product::resolve(['name' => $product->name,'img' => $product->product_image,'return' => $product->return_date,'rented' => $product->rented_by,'rental' => $product->rental_started,'id' => $product->id] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
 <?php $component->withName('product'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>

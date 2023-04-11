@@ -16,17 +16,33 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        // dd($request);
         $formFields = $request->validate([
             'email' => ['required', 'email'],
             'password' => 'required'
         ]);
 
         if (auth()->attempt($formFields)) {
-            $request->session()->regenerate();
-            return redirect('/');
+            $token = auth()->user()->createToken('authToken')->plainTextToken;
+
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'token' => $token
+                ]);
+            } else {
+                $request->session()->regenerate();
+                return redirect('/');
+            }
         }
-        return back();
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Invalid login credentials'
+            ], 401);
+        } else {
+            return back()->withErrors([
+                'email' => 'The provided credentials do not match our records.'
+            ]);
+        }
     }
 
     public function register(Request $request)
@@ -41,17 +57,29 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        return $this->success([
-            'user' => $user,
-            'message' => 'Registration successful',
-            'token' => $user->createToken('authToken')->plainTextToken,
-        ]);
+        if ($request->expectsJson()) {
+            $request->user()->tokens()->delete();
+            return response()->json([
+                'success' => 'Registration successful',
+                'token' => $user->createToken('authToken')->plainTextToken,
+            ]);
+        } else {
+            return redirect('/')->with([
+                'success' => 'Registration successful',
+                'token' => $user->createToken('authToken')->plainTextToken,
+            ]);
+        }
     }
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
-        return response()->json([
-            'message' => 'You have been logged out'
-        ]);
+
+
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 }

@@ -4,15 +4,28 @@
 @endsection
 @section('content')
 <div class="container">   
-<section class="flex-col">
-    <h2>Al jouw producten</h2>
-    <section class="flex-row">
+<section>
+    
+    <h2>Alle producten</h2>
+    
+        <div class="search-container">
+    <form method="GET" action="/products/search" class="search">
+        <input type="text" name="q" placeholder="Zoek naar product">
+        <button type="submit">Search</button>
+    </form>
+</div>
+    <section class="grid animate">
     @foreach ($products as $product)
     
-    <x-product :name="$product->name" :img="$product->product_image" :return="$product->return_date" :rented="$product->rented_by" :rental="$product->rental_started" :id="$product->id" />
+    <x-product  :name="$product->name" :img="$product->product_image" :return="$product->return_date" :rented="$product->rented_by" :rental="$product->rental_started" :id="$product->id" />
    
     
-    @endforeach</section>
+    @endforeach
+</section>
 </section>
 </div>
+@endsection
+
+@section('scripts')
+<script src="{{asset('js/animations.js')}}"></script>
 @endsection

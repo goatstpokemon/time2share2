@@ -17,16 +17,22 @@
 }
 
 .btn-beschikbaar {
-    background-color: #0088cf;
-    border-radius: 0.3rem;
-    color: white;
     width: 7rem;
-    height: 2.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .beschrijving {
     margin-top: 3rem;
+}
+
+.btn {
+    background-color: #0088cf;
+    border-radius: 0.3rem;
+    color: white;
+    height: 2.5rem;
+    width: 7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    word-wrap: nowrap;
 }

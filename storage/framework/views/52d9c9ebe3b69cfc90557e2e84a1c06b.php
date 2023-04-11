@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="<?php echo e(asset('css/style.css')); ?>">
 <link rel="stylesheet" href="<?php echo e(asset('css/grid.css')); ?>">
 <link rel="stylesheet" href="<?php echo e(asset('css/flex.css')); ?>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css" integrity="sha256-XoaMnoYC5TH6/+ihMEnospgm0J1PM/nioxbOUdnM8HY=" crossorigin="anonymous">
 <?php echo $__env->yieldContent('assets'); ?>
  
     <title>Time2Share</title>
@@ -31,5 +32,8 @@
 <?php unset($__componentOriginald31f0a1d6e85408eecaaa9471b609820); ?>
 <?php endif; ?>
     <?php echo $__env->yieldContent('content'); ?>
+
+    <?php echo $__env->yieldContent('scripts'); ?>
+    
 </body>
 </html><?php /**PATH C:\Users\Luke\Desktop\time2share2\resources\views/layout.blade.php ENDPATH**/ ?>

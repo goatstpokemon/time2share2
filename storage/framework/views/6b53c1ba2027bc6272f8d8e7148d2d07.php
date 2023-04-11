@@ -1,0 +1,44 @@
+<?php $__env->startSection('assets'); ?>
+<link rel="stylesheet" href="<?php echo e(asset('css/product.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('css/home-page.css')); ?>">
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+<section class="container-show">
+    <img src="<?php echo e($user->profile_image); ?>" alt="<?php echo e($user->name); ?>"  width="200px" height="200px">
+<h1><?php echo e($user->name); ?></h1>
+<span><strong>Al lid sinds: </strong> <?php echo e(date('d M Y', strtotime($user->created_at))); ?></span>
+<h2 class="mt-5">Alle producten van <?php echo e($user->name); ?></h2>
+<section class="grid ">
+    
+    <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    
+    <?php if (isset($component)) { $__componentOriginal4912e54b47cc540c8c40bfbaaa4ad898 = $component; } ?>
+<?php $component = App\View\Components\Product::resolve(['name' => $product->name,'img' => $product->product_image,'return' => $product->return_date,'rented' => $product->rented_by,'rental' => $product->rental_started,'id' => $product->id] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('product'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\Product::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal4912e54b47cc540c8c40bfbaaa4ad898)): ?>
+<?php $component = $__componentOriginal4912e54b47cc540c8c40bfbaaa4ad898; ?>
+<?php unset($__componentOriginal4912e54b47cc540c8c40bfbaaa4ad898); ?>
+<?php endif; ?>
+   
+    
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+</section>
+
+<h2>Alle reviews van <?php echo e($user->name); ?></h2>
+<section>
+    
+    
+</section>
+</section>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Luke\Desktop\time2share2\resources\views/pages/user/show.blade.php ENDPATH**/ ?>

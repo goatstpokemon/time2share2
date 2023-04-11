@@ -3,9 +3,17 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 <div class="container">   
-<section class="flex-col">
-    <h2>Al jouw producten</h2>
-    <section class="flex-row">
+<section>
+    
+    <h2>Alle producten</h2>
+    
+        <div class="search-container">
+    <form method="GET" action="/products/search" class="search">
+        <input type="text" name="q" placeholder="Zoek naar product">
+        <button type="submit">Search</button>
+    </form>
+</div>
+    <section class="grid animate">
     <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     
     <?php if (isset($component)) { $__componentOriginal4912e54b47cc540c8c40bfbaaa4ad898 = $component; } ?>
@@ -25,8 +33,13 @@
 <?php endif; ?>
    
     
-    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?></section>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+</section>
 </section>
 </div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('scripts'); ?>
+<script src="<?php echo e(asset('js/animations.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Luke\Desktop\time2share2\resources\views/pages/products/index.blade.php ENDPATH**/ ?>
