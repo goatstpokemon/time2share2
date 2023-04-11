@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class LendingsController extends Controller
 {
     //
-   
+
     public function store(Request $request, $productId)
     {
         $userId = auth()->user()->id;
@@ -22,5 +22,5 @@ class LendingsController extends Controller
         if (!$lending) {
             return redirect()->back()->withErrors(['Je hebt dit product nooit geleend']);
         }
-       
+    }
 }

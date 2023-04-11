@@ -186,9 +186,7 @@ class ProductController extends Controller
         return redirect('/');
     }
 
-    public function accept()
-    {
-    }
+
 
     public function borrow(Request $request)
     {
